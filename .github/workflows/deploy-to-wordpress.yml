@@ -1,0 +1,156 @@
+name: 🥋 Deploy Panamerican Taekwondo Academy to WordPressname: 🥋 Deploy Panamerican Taekwondo Academy to WordPress
+
+
+
+on:on:
+
+  push:  push:
+
+    branches: [ main ]    branches: [ main ]
+
+  pull_request:  pull_request:
+
+    branches: [ main ]    branches: [ main ]
+
+
+
+jobs:jobs:
+
+  deploy:  deploy:
+
+    runs-on: ubuntu-latest    runs-on: ubuntu-latest
+
+        
+
+    steps:    steps:
+
+    - name: 📥 Checkout Repository    - name: 📥 Checkout Repository
+
+      uses: actions/checkout@v4      uses: actions/checkout@v4
+
+            
+
+    - name: 🔧 Setup Node.js    - name: 🔧 Setup Node.js
+
+      uses: actions/setup-node@v4      uses: actions/setup-node@v4
+
+      with:      with:
+
+        node-version: '18'        node-version: '18'
+
+                
+
+    - name: 📦 Install Dependencies    - name: 📦 Install Dependencies
+
+      run: |      run: |
+
+        npm install -g sass        npm install -g sass
+
+        npm install -g uglify-js        npm install -g uglify-js
+
+        npm install -g html-minifier        npm install -g html-minifier
+
+                
+
+    - name: 🎨 Build CSS from SASS    - name: 🎨 Build CSS from SASS
+
+      run: |      run: |
+
+        if [ -f "src/scss/style.scss" ]; then        if [ -f "src/scss/style.scss" ]; then
+
+          sass src/scss/style.scss src/css/style.css --style compressed          sass src/scss/style.scss src/css/style.css --style compressed
+
+        fi        fi
+
+                
+
+    - name: 📝 Minify JavaScript    - name: 📝 Minify JavaScript
+
+      run: |      run: |
+
+        if [ -f "src/js/main.js" ]; then        if [ -f "src/js/main.js" ]; then
+
+          uglifyjs src/js/main.js -o src/js/main.min.js -c -m          uglifyjs src/js/main.js -o src/js/main.min.js -c -m
+
+        fi        fi
+
+                
+
+    - name: 🗜️ Minify HTML    - name: 🗜️ Minify HTML
+
+      run: |      run: |
+
+        if [ -f "src/index.html" ]; then        if [ -f "src/index.html" ]; then
+
+          html-minifier --collapse-whitespace --remove-comments --minify-css --minify-js src/index.html -o src/index.min.html          html-minifier --collapse-whitespace --remove-comments --minify-css --minify-js src/index.html -o src/index.min.html
+
+        fi        fi
+
+                
+
+    - name: 🚀 Deploy to WordPress via FTP    - name: 🚀 Deploy to WordPress via FTP
+
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+
+      with:      with:
+
+        server: ${{ secrets.FTP_SERVER }}        server: ${{ secrets.FTP_SERVER }}
+
+        username: ${{ secrets.FTP_USERNAME }}        username: ${{ secrets.FTP_USERNAME }}
+
+        password: ${{ secrets.FTP_PASSWORD }}        password: ${{ secrets.FTP_PASSWORD }}
+
+        local-dir: ./src/        local-dir: ./src/
+
+        server-dir: /public_html/        server-dir: /public_html/
+
+        exclude: |        exclude: |
+
+          **/.git*          **/.git*
+
+          **/.git*/**          **/.git*/**
+
+          **/node_modules/**          **/node_modules/**
+
+          **/*wordpress*          
+
+          **/*WordPress*    - name: 📧 Notify Academy Team
+
+          **/*WORDPRESS*      if: success()
+
+          **/*wp-*      uses: 8398a7/action-slack@v3
+
+          **/*WP-*      with:
+
+          **/wp-*        status: success
+
+          **/WP-*        text: "🥋 Panamerican Taekwondo Academy website deployed successfully!"
+
+          **/*.wp      env:
+
+          **/*.WP        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+
+          **/wordpress/**
+          **/WordPress/**
+          **/WORDPRESS/**
+          
+    - name: 📧 Notify Academy Team
+      if: always()
+      uses: 8398a7/action-slack@v3
+      with:
+        status: ${{ job.status }}
+        channel: '#taekwondo-deployments'
+        username: 'GitHub Actions'
+        icon_emoji: ':martial_arts_uniform:'
+        fields: repo,message,commit,author,action,eventName,ref,workflow
+        text: |
+          🥋 Panamerican Taekwondo Academy Deployment Status: ${{ job.status }}
+          
+          Repository: ${{ github.repository }}
+          Branch: ${{ github.ref }}
+          Commit: ${{ github.sha }}
+          Author: ${{ github.actor }}
+          
+          ${{ job.status == 'success' && '✅ Website deployed successfully!' || '❌ Deployment failed!' }}
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
