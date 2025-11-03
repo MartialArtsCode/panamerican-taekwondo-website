@@ -1,4 +1,4 @@
-﻿name: 🧪 Test Academy Website Quality
+name: ?? Test Academy Website Quality
 
 on:
   push:
@@ -11,21 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: �� Checkout Code
+    - name: ?? Checkout Code
       uses: actions/checkout@v4
       
-    - name: 🔍 HTML Validation
+    - name: ?? HTML Validation
       uses: Cyb3r-Jak3/html5validator-action@v7.2.0
       with:
         root: src/
         
-    - name: 📱 Lighthouse Performance Test
+    - name: ?? Lighthouse Performance Test
       uses: treosh/lighthouse-ci-action@v10
       with:
         configPath: './lighthouse-config.js'
         uploadDir: './lighthouse-results'
         
-    - name: 🔒 Security Scan
+    - name: ?? Security Scan
       uses: github/super-linter@v4
       env:
         DEFAULT_BRANCH: main
@@ -35,22 +35,22 @@ jobs:
         VALIDATE_CSS: true
         VALIDATE_JAVASCRIPT_ES: true
         
-    - name: ♿ Accessibility Check
+    - name: ? Accessibility Check
       run: |
         npm install -g @axe-core/cli
         axe src/index.html --exit
         
-    - name: �� Generate Report
+    - name: ?? Generate Report
       run: |
-        echo "# 🥋 Panamerican Taekwondo Academy - Quality Report" > quality-report.md
-        echo "Generated: -Force(date)" >> quality-report.md
+        echo "# ?? Panamerican Taekwondo Academy - Quality Report" > quality-report.md
+        echo "Generated: $(date)" >> quality-report.md
         echo "## Test Results" >> quality-report.md
-        echo "- ✅ HTML Validation: Passed" >> quality-report.md
-        echo "- ✅ Performance: Above 90%" >> quality-report.md
-        echo "- ✅ Accessibility: WCAG 2.1 Compliant" >> quality-report.md
-        echo "- ✅ Security: No vulnerabilities found" >> quality-report.md
+        echo "- ? HTML Validation: Passed" >> quality-report.md
+        echo "- ? Performance: Above 90%" >> quality-report.md
+        echo "- ? Accessibility: WCAG 2.1 Compliant" >> quality-report.md
+        echo "- ? Security: No vulnerabilities found" >> quality-report.md
         
-    - name: 📤 Upload Results
+    - name: ?? Upload Results
       uses: actions/upload-artifact@v4
       with:
         name: quality-report
