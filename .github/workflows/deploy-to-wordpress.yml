@@ -43,18 +43,18 @@ jobs:
           html-minifier --collapse-whitespace --remove-comments --minify-css --minify-js src/index.html -o src/index.min.html
         fi
         
-    - name: 🚀 Deploy to WordPress via FTP
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./src/
-        server-dir: /public_html/
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
+   # - name: 🚀 Deploy to WordPress via FTP
+   #  uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+   #  with:
+   #   server: ${{ secrets.FTP_SERVER }}
+   #  username: ${{ secrets.FTP_USERNAME }}
+   # password: ${{ secrets.FTP_PASSWORD }}
+   # local-dir: ./src/
+   # server-dir: /public_html/
+   # exclude: |
+   # **/.git*
+   # **/.git*/**
+   # **/node_modules/**
           
     - name: 📧 Notify Academy Team
       if: success()
