@@ -1,4 +1,4 @@
-name: 🧪 Test Academy Website Quality
+﻿name: 🧪 Test Academy Website Quality
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: 📥 Checkout Code
+    - name: �� Checkout Code
       uses: actions/checkout@v4
       
     - name: 🔍 HTML Validation
@@ -22,23 +22,28 @@ jobs:
     - name: 📱 Lighthouse Performance Test
       uses: treosh/lighthouse-ci-action@v10
       with:
-        configPath: './lighthouserc.js'
+        configPath: './lighthouse-config.js'
         uploadDir: './lighthouse-results'
         
     - name: 🔒 Security Scan
-      uses: securecodewarrior/github-action-add-sarif@v1
-      with:
-        sarif-file: 'security-scan.sarif'
+      uses: github/super-linter@v4
+      env:
+        DEFAULT_BRANCH: main
+        GITHUB_TOKEN: -Force{{ secrets.GITHUB_TOKEN }}
+        LINTER_RULES_PATH: '.'
+        VALIDATE_HTML: true
+        VALIDATE_CSS: true
+        VALIDATE_JAVASCRIPT_ES: true
         
     - name: ♿ Accessibility Check
       run: |
         npm install -g @axe-core/cli
         axe src/index.html --exit
         
-    - name: 📊 Generate Report
+    - name: �� Generate Report
       run: |
         echo "# 🥋 Panamerican Taekwondo Academy - Quality Report" > quality-report.md
-        echo "Generated: $(date)" >> quality-report.md
+        echo "Generated: -Force(date)" >> quality-report.md
         echo "## Test Results" >> quality-report.md
         echo "- ✅ HTML Validation: Passed" >> quality-report.md
         echo "- ✅ Performance: Above 90%" >> quality-report.md
