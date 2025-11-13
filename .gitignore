@@ -3,6 +3,10 @@ wp-config.php
 wp-content/uploads/
 .htaccess
 
+# Backup files
+*_backup.*
+*.bak
+
 # Development
 node_modules/
 .env
