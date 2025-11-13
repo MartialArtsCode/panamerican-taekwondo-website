@@ -12,13 +12,13 @@
 const initWebsite = () => {
     try {
         console.log('Panamerican Taekwondo Academy - Website initialized');
-        
+
         // Initialize mobile navigation
         initMobileNavigation();
-        
+
         // Initialize form validation
         initFormValidation();
-        
+
         // Initialize smooth scrolling
         initSmoothScrolling();
     } catch (error) {
@@ -32,7 +32,7 @@ const initWebsite = () => {
 const initMobileNavigation = () => {
     const navToggle = document.querySelector('.mobile-nav-toggle');
     const mobileNav = document.querySelector('.mobile-nav');
-    
+
     if (navToggle && mobileNav) {
         navToggle.addEventListener('click', () => {
             mobileNav.classList.toggle('hidden');
@@ -45,9 +45,9 @@ const initMobileNavigation = () => {
  */
 const initFormValidation = () => {
     const forms = document.querySelectorAll('.contact-form');
-    
+
     forms.forEach(form => {
-        form.addEventListener('submit', (event) => {
+        form.addEventListener('submit', event => {
             if (!validateForm(form)) {
                 event.preventDefault();
             }
@@ -60,10 +60,10 @@ const initFormValidation = () => {
  * @param {HTMLFormElement} form - The form to validate
  * @returns {boolean} - Whether the form is valid
  */
-const validateForm = (form) => {
+const validateForm = form => {
     const requiredFields = form.querySelectorAll('[required]');
     let isValid = true;
-    
+
     requiredFields.forEach(field => {
         if (!field.value.trim()) {
             isValid = false;
@@ -72,7 +72,7 @@ const validateForm = (form) => {
             field.classList.remove('error');
         }
     });
-    
+
     return isValid;
 };
 
@@ -81,14 +81,14 @@ const validateForm = (form) => {
  */
 const initSmoothScrolling = () => {
     const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    
+
     anchorLinks.forEach(link => {
-        link.addEventListener('click', (event) => {
+        link.addEventListener('click', event => {
             const targetId = link.getAttribute('href');
-            
+
             if (targetId !== '#') {
                 const targetElement = document.querySelector(targetId);
-                
+
                 if (targetElement) {
                     event.preventDefault();
                     targetElement.scrollIntoView({

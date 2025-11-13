@@ -1,12 +1,12 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "indentation": 4,
-    "color-hex-case": "lower",
-    "color-hex-length": "long",
     "selector-class-pattern": null,
     "custom-property-pattern": null,
     "declaration-block-no-redundant-longhand-properties": null,
+    "color-function-notation": "legacy",
+    "alpha-value-notation": "number",
+    "media-feature-range-notation": "prefix",
     "comment-empty-line-before": ["always", {
       "except": ["first-nested"],
       "ignore": ["stylelint-commands"]

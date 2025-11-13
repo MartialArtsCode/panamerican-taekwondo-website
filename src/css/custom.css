@@ -12,23 +12,23 @@
     --tkd-red: #c41e3a;
     --tkd-gold: #ffd700;
     --tkd-black: #1a1a1a;
-    --tkd-white: #ffffff;
-    
+    --tkd-white: #fff;
+
     /* Spacing */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 1.5rem;
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
-    
+
     /* Transitions */
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s ease;
-    
+
     /* Border Radius */
     --border-radius-sm: 0.25rem;
     --border-radius-md: 0.5rem;
-    
+
     /* Box Shadow */
     --box-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
     --box-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
@@ -43,7 +43,7 @@
         transform: translateX(0);
         transition: transform var(--transition-normal);
     }
-    
+
     .mobile-nav.hidden {
         transform: translateX(-100%);
     }
@@ -58,8 +58,9 @@
 
 .contact-form input,
 .contact-form textarea {
-    transition: border-color var(--transition-fast),
-                box-shadow var(--transition-fast);
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast);
 }
 
 .contact-form input:focus,
@@ -78,8 +79,9 @@
    Blog Post Cards
    ============================================ */
 .blog-post {
-    transition: transform var(--transition-fast),
-                box-shadow var(--transition-fast);
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
 }
 
 .blog-post:hover {
