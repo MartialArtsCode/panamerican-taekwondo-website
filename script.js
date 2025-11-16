@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initScrollAnimations();
     initButtonTracking();
     initHoverEffects();
-    initMobileMenu();
     addDynamicStyles();
     initParticleEffect();
     initHeaderAnimation();
@@ -148,33 +147,6 @@ function initHoverEffects() {
 }
 
 /**
- * Initialize mobile menu functionality
- */
-function initMobileMenu() {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav, .nav');
-    
-    if (menuToggle && nav) {
-        menuToggle.addEventListener('click', function() {
-            nav.classList.toggle('active');
-            this.classList.toggle('active');
-            
-            const isExpanded = nav.classList.contains('active');
-            this.setAttribute('aria-expanded', isExpanded);
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-                nav.classList.remove('active');
-                menuToggle.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-    }
-}
-
-/**
  * Add dynamic styles and animations
  */
 function addDynamicStyles() {
@@ -290,58 +262,6 @@ function initHeaderAnimation() {
 }
 
 /**
- * Add parallax scrolling effect
- */
-function initParallaxEffect() {
-    const sections = document.querySelectorAll('section');
-    
-    window.addEventListener('scroll', debounce(function() {
-        const scrolled = window.pageYOffset;
-        
-        sections.forEach((section, index) => {
-            const speed = (index + 1) * 0.1;
-            section.style.transform = `translateY(${scrolled * speed}px)`;
-        });
-    }, 10));
-}
-
-/**
- * Form validation utility
- */
-function validateForm(formElement) {
-    const inputs = formElement.querySelectorAll('input[required], textarea[required]');
-    let isValid = true;
-    
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            isValid = false;
-            input.classList.add('error');
-            input.style.borderColor = '#cc1f2b';
-        } else {
-            input.classList.remove('error');
-            input.style.borderColor = '';
-        }
-    });
-    
-    return isValid;
-}
-
-/**
- * Utility: Debounce function for performance
- */
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-/**
  * Add loading animation
  */
 window.addEventListener('load', function() {
@@ -351,11 +271,5 @@ window.addEventListener('load', function() {
         document.body.style.opacity = '1';
     }, 100);
 });
-
-// Export utilities for use in other scripts
-window.PTAcademy = {
-    validateForm,
-    debounce
-};
 
 console.log('✨ All features initialized successfully!');
