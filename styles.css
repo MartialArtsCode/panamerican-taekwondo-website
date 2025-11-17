@@ -166,7 +166,7 @@ section h2 {
 
 .hero-title::before,
 .hero-title::after {
-    content: '';
+    content: 'images/full.png';
     position: absolute;
     top: 0;
     left: 0;
