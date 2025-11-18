@@ -1,0 +1,19 @@
+{
+  "name": "panamerican-taekwondo-website",
+  "version": "1.0.0",
+  "description": "Panamerican Taekwondo Academy website",
+  "main": "index.html",
+  "scripts": {
+    "dev": "http-server -p 3000 -o"
+  },
+  "keywords": [
+    "taekwondo",
+    "martial-arts",
+    "website"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

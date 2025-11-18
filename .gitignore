@@ -1,0 +1,19 @@
+# WordPress
+wp-config.php
+wp-content/uploads/
+.htaccess
+
+# Development
+node_modules/
+.env
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
