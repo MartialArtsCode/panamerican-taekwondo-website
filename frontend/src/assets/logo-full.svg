@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="200" viewBox="0 0 800 200">
+  <rect width="100%" height="100%" fill="white"/>
+  <!-- left mark -->
+  <g transform="translate(20,20)">
+    <circle cx="40" cy="32" r="22" fill="#0b57d0" />
+    <path d="M14 104 C56 34 112 34 156 12" fill="none" stroke="#0b57d0" stroke-width="18" stroke-linecap="round"/>
+    <path d="M70 120 C118 82 180 56 268 36" fill="none" stroke="#d21a1a" stroke-width="22" stroke-linecap="round"/>
+  </g>
+  <!-- text -->
+  <g transform="translate(220,120)">
+    <text x="0" y="0" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="700" fill="#0b57d0">PANAMERICAN</text>
+    <text x="0" y="40" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#0b57d0">TAEKWONDO ACADEMY</text>
+  </g>
+</svg>
